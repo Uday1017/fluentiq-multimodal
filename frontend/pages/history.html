@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FluentIQ — History & Analytics</title>
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">FluentIQ — History & Analytics</div>
+    <div class="nav">
+      <a href="../index.html">Upload</a>
+      <a href="../results.html">Last Result</a>
+    </div>
+  </header>
+
+  <main class="container">
+      <div style="display:flex; gap:10px; margin-bottom:14px; align-items:center">
+    <button id="exportCsvBtn" class="actions-btn">Export CSV</button>
+    <button id="exportPngBtn" class="actions-btn">Export Charts PNG</button>
+    <select id="sessionExportSelect" style="padding:6px; border-radius:6px;">
+      <option value="">Select session to export JSON</option>
+    </select>
+    <button id="exportSessionJsonBtn" class="actions-btn secondary">Export Session JSON</button>
+  </div>
+
+    <section class="summary-cards" id="summaryCards">
+      <!-- summary cards populated by JS -->
+    </section>
+
+    <section class="charts-row">
+      <div class="card">
+        <h3>Overall Score Over Time</h3>
+        <canvas id="overallLineChart" height="160"></canvas>
+      </div>
+
+      <div class="card">
+        <h3>Compare Sessions (Radar)</h3>
+        <div class="compare-controls">
+          <select id="compareA"></select>
+          <select id="compareB"></select>
+          <button id="compareBtn">Compare</button>
+        </div>
+        <canvas id="compareRadarChart" height="240"></canvas>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Sessions</h3>
+      <div class="table-wrap">
+        <table id="sessionsTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Timestamp</th>
+              <th>Overall</th>
+              <th>Fluency</th>
+              <th>Grammar</th>
+              <th>Posture</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" id="sessionDetail" style="display:none">
+      <h3>Session Detail</h3>
+      <div id="detailContent"></div>
+    </section>
+
+  </main>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/charts.js"></script>
+  <script>
+    // initialize page
+    (async function init() {
+      try {
+        const [all, summary] = await Promise.all([fetchHistoryAll(), fetchHistorySummary()]);
+        renderSummaryCards(summary);
+        renderSessionsTable(all);
+        renderOverallLine(all);
+        populateCompareSelects(all);
+      } catch (err) {
+        console.error(err);
+        alert("Failed to load history — make sure backend is running at http://127.0.0.1:8000");
+      }
+
+      document.getElementById("compareBtn").addEventListener("click", () => {
+        const a = document.getElementById("compareA").value;
+        const b = document.getElementById("compareB").value;
+        if (!a || !b || a === b) {
+          alert("Choose two different sessions to compare.");
+          return;
+        }
+        compareSessions(Number(a), Number(b));
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FluentIQ — Upload</title>
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="topbar modern">
+    <div class="brand">FluentIQ</div>
+    <nav class="nav">
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card uploader-card">
+      <h1 class="page-title">Upload your presentation</h1>
+      <p class="muted">Upload a recorded video (MP4/MOV/WebM) or audio file. The system will analyze speech, language and non-verbal cues and produce a detailed report.</p>
+
+      <div class="upload-area" id="uploadArea">
+        <input id="fileInput" type="file" accept="video/*,audio/*" />
+        <div id="fileMeta" class="file-meta" style="display:none">
+          <div id="fileName" class="file-name"></div>
+          <video id="previewVideo" controls style="max-width:400px; display:none"></video>
+        </div>
+
+        <div class="controls">
+          <button id="submitBtn" class="primary" disabled>Analyze & Generate Feedback</button>
+          <button id="resetBtn" class="secondary" style="display:none">Choose another file</button>
+        </div>
+
+        <div id="progressWrap" style="display:none; margin-top:12px">
+          <div class="progress">
+            <div id="progressBar" class="progress-bar" style="width:0%"></div>
+          </div>
+          <div id="progressText" class="muted" style="margin-top:6px">Uploading…</div>
+        </div>
+
+        <div id="statusMsg" style="margin-top:12px"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/js/upload.js"></script>
+</body>
+</html>

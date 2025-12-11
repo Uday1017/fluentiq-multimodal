@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+backend/.venv/
+venv/
+env/
+
+# OS files
+.DS_Store
+
+# Node/Web
+node_modules/
+
+# Local storage
+*.db
+backend/app/db/fluentiq.db
+
+# Generated assets
+*.log
+
+# Sensitive
+.env
+*.env
