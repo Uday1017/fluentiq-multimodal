@@ -29,8 +29,8 @@ This project supports research titled:
 
 🧠 System Architecture
                ┌──────────────┐
-               │   Frontend    │
-               │ HTML/CSS/JS   │
+               │   Frontend   │
+               │ HTML/CSS/JS  │
                └──────┬───────┘
                       │ Upload video/audio
                       ▼
@@ -131,7 +131,7 @@ Charts	Chart.js
 Export	CSV, PNG, JSON
 🚀 Setup Instructions
 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/fluentiq-multimodal.git
+git clone https://github.com/Uday1017/fluentiq-multimodal.git
 cd fluentiq-multimodal/backend
 
 2. Setup Python virtual environment
@@ -152,53 +152,6 @@ opencv-python
 numpy
 librosa
 
-4. Run the backend
-uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
-
-
-Test:
-🔗 http://127.0.0.1:8000/ping
-
-🔗 http://127.0.0.1:8000/docs
-
-5. Run the frontend
-
-From the frontend/ folder:
-
-Option A — VS Code Live Server
-
-Right-click → Open with Live Server
-
-Option B — Python static server
-python3 -m http.server 5500
-
-
-Then open:
-🔗 http://127.0.0.1:5500/pages/index.html
-
-🧪 API Endpoints
-Health Check
-GET /ping
-
-Multimodal Analysis
-POST /analyze/audio
-file: UploadFile
-
-
-Returns:
-
-{
-  "transcript": "...",
-  "audio": {...},
-  "text": {...},
-  "video": {...},
-  "fused": {...},
-  "stats": {...}
-}
-
-History
-GET /history/all
-GET /history/summary
 
 📈 Dashboard Features
 
